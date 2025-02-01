@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "kyboapi": "1.0.0",
   "info": {
     "title": "Kybo API",
     "description": "Official Kybo Developer API",
@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/grouprank": {
       "post": {
         "description": "Rank a Roblox user within a group",
         "requestBody": {
