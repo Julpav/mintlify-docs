@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://api.kybo.group"
+      "url": "https://api.kybo.group"
     }
   ],
   "security": [
@@ -23,11 +23,11 @@
       "post": {
         "description": "Rank a Roblox user within a group",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Group rank request body",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/GroupRankRequest"
               }
             }
           },
@@ -35,17 +35,7 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
+            "description": "successful group rank update",
             "content": {
               "application/json": {
                 "schema": {
@@ -53,29 +43,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
           },
           "400": {
             "description": "unexpected error",
@@ -93,41 +60,35 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "GroupRankRequest": {
         "required": [
-          "name"
+          "groupid",
+          "userid",
+          "roleid",
+          "key"
         ],
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "groupid": {
+            "description": "The group ID",
+            "type": "integer",
+            "format": "int64"
           },
-          "tag": {
-            "description": "Tag to specify the type",
+          "userid": {
+            "description": "The user ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "roleid": {
+            "description": "The role ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "key": {
+            "description": "API key or identifier",
             "type": "string"
           }
         }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
       },
       "Error": {
         "required": [
